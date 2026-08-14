@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="반려견의 건강한 매일을 위한 프리미엄 수제 사료와 영양 간식, petinclover">
+  <title>petinclover — 건강을 담은 행복한 한 끼</title>
+  <style>
+    :root {
+      --olive-900: #34452e;
+      --olive-700: #596f4d;
+      --olive-500: #829674;
+      --olive-200: #cad4bd;
+      --cream: #faf6eb;
+      --cream-deep: #eee5cf;
+      --paper: #fffdf7;
+      --brown: #765b45;
+      --ink: #30352d;
+      --muted: #74786e;
+      --line: rgba(52, 69, 46, .15);
+      --shadow: 0 22px 60px rgba(66, 74, 52, .10);
+      --serif: Georgia, "Times New Roman", "Noto Serif KR", serif;
+      --sans: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 18%, rgba(166, 183, 146, .13), transparent 22rem),
+        radial-gradient(circle at 93% 48%, rgba(225, 197, 142, .12), transparent 25rem),
+        var(--cream);
+      font-family: var(--sans);
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .22;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
+      z-index: 20;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .container { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+
+    .site-header {
+      position: fixed;
+      z-index: 30;
+      top: 0; left: 0; right: 0;
+      transition: .3s ease;
+    }
+    .site-header.scrolled {
+      background: rgba(250, 246, 235, .9);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--line);
+    }
+    .nav { height: 86px; display: flex; align-items: center; justify-content: space-between; }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--olive-900);
+      font: 700 21px/1 var(--serif);
+      letter-spacing: -.03em;
+    }
+    .clover { position: relative; width: 22px; height: 22px; transform: rotate(45deg); }
+    .clover i {
+      position: absolute; width: 10px; height: 10px;
+      background: var(--olive-500); border-radius: 8px 8px 3px 8px;
+    }
+    .clover i:nth-child(1) { left: 1px; top: 1px; }
+    .clover i:nth-child(2) { right: 1px; top: 1px; transform: rotate(90deg); }
+    .clover i:nth-child(3) { right: 1px; bottom: 1px; transform: rotate(180deg); }
+    .clover i:nth-child(4) { left: 1px; bottom: 1px; transform: rotate(270deg); }
+    .nav-links { display: flex; align-items: center; gap: 34px; }
+    .nav-links a { font-size: 14px; color: #596054; transition: color .2s; }
+    .nav-links a:hover { color: var(--olive-900); }
+    .nav-cta {
+      border: 1px solid var(--olive-700);
+      padding: 9px 18px;
+      border-radius: 100px;
+      color: var(--olive-900) !important;
+    }
+    .menu-btn { display: none; border: 0; background: transparent; color: var(--olive-900); padding: 8px; cursor: pointer; }
+    .menu-btn span { display: block; width: 24px; height: 2px; background: currentColor; margin: 5px; transition: .2s; }
+
+    .hero { min-height: 760px; height: 100svh; max-height: 960px; display: grid; align-items: center; position: relative; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 4vw; padding-top: 70px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--olive-700); font-size: 12px; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+    h1 { margin: 20px 0 24px; color: var(--olive-900); font: 400 clamp(64px, 8vw, 116px)/.86 var(--serif); letter-spacing: -.075em; }
+    h1 span { display: block; margin-top: 24px; font: 500 clamp(24px, 3vw, 40px)/1.25 var(--sans); letter-spacing: -.06em; color: var(--ink); }
+    .hero-copy { max-width: 570px; margin: 0 0 36px; color: var(--muted); font-size: 16px; }
+    .hero-actions { display: flex; gap: 12px; align-items: center; }
+    .btn {
+      display: inline-flex; justify-content: center; align-items: center; gap: 10px;
+      min-height: 52px; padding: 0 24px; border-radius: 100px; transition: .25s;
+      font-size: 14px; font-weight: 700;
+    }
+    .btn-primary { background: var(--olive-900); color: white; box-shadow: 0 10px 24px rgba(52, 69, 46, .18); }
+    .btn-primary:hover { transform: translateY(-2px); background: #263722; }
+    .btn-text:hover { color: var(--olive-700); }
+    .arrow { font-size: 19px; line-height: 0; }
+
+    .hero-art { position: relative; height: min(590px, 68vh); min-height: 470px; }
+    .wash { position: absolute; border-radius: 45% 55% 48% 52% / 56% 42% 58% 44%; filter: blur(.2px); }
+    .wash-a { inset: 8% 4% 5% 5%; background: rgba(180, 192, 154, .35); transform: rotate(-6deg); box-shadow: inset 20px 20px 70px rgba(255,255,255,.5); }
+    .wash-b { width: 45%; height: 35%; right: -4%; bottom: 4%; background: rgba(224, 194, 135, .22); transform: rotate(12deg); }
+    .sun { position: absolute; width: 145px; height: 145px; right: 8%; top: 7%; border-radius: 50%; background: rgba(231, 207, 151, .42); }
+    .dog {
+      position: absolute; z-index: 2; left: 50%; bottom: 8%; transform: translateX(-50%);
+      width: 270px; height: 365px;
+    }
+    .dog-body { position: absolute; left: 48px; bottom: 0; width: 175px; height: 230px; border-radius: 48% 52% 35% 35%; background: #b58a62; box-shadow: inset -24px -12px 0 rgba(112,77,48,.09); }
+    .dog-head { position: absolute; left: 46px; top: 24px; width: 180px; height: 185px; border-radius: 46% 46% 52% 52%; background: #c49a70; border: 2px solid rgba(82,61,42,.14); }
+    .ear { position: absolute; z-index: -1; top: 12px; width: 72px; height: 132px; background: #856143; border-radius: 70% 30% 65% 35%; }
+    .ear.left { left: 20px; transform: rotate(18deg); }
+    .ear.right { right: 20px; transform: scaleX(-1) rotate(18deg); }
+    .eye { position: absolute; top: 86px; width: 11px; height: 13px; border-radius: 50%; background: #3c3128; }
+    .eye.left { left: 50px; } .eye.right { right: 50px; }
+    .eye::after { content: ""; position: absolute; width: 3px; height: 3px; top: 2px; left: 2px; border-radius: 50%; background: white; }
+    .muzzle { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); width: 74px; height: 58px; background: #e0bd95; border-radius: 50%; }
+    .nose { position: absolute; left: 50%; top: 4px; transform: translateX(-50%); width: 25px; height: 18px; background: #40342b; border-radius: 55% 55% 45% 45%; }
+    .smile { position: absolute; width: 28px; height: 16px; top: 21px; border-bottom: 2px solid #5b4536; border-radius: 50%; }
+    .smile.left { left: 10px; transform: rotate(8deg); } .smile.right { right: 10px; transform: rotate(-8deg); }
+    .collar { position: absolute; left: 45px; top: 186px; width: 180px; height: 24px; border-radius: 50%; background: var(--olive-700); transform: rotate(-2deg); }
+    .tag { position: absolute; left: 124px; top: 197px; width: 28px; height: 28px; border-radius: 50% 50% 47% 53%; background: #e0c279; color: var(--olive-900); text-align: center; font: 700 18px/29px var(--serif); }
+    .leaf { position: absolute; width: 55px; height: 24px; border-radius: 100% 0 100% 0; background: rgba(89,111,77,.56); }
+    .l1 { left: 2%; top: 25%; transform: rotate(38deg); } .l2 { left: 13%; top: 14%; transform: rotate(78deg) scale(.7); }
+    .l3 { right: 3%; bottom: 27%; transform: rotate(-32deg); } .l4 { right: 14%; bottom: 16%; transform: rotate(-72deg) scale(.75); }
+    .scribble { position: absolute; border: 1px solid rgba(52,69,46,.24); border-radius: 48%; width: 310px; height: 55px; left: 50%; bottom: 3%; transform: translateX(-50%) rotate(-2deg); }
+    .scroll-note { position: absolute; left: 28px; bottom: 32px; writing-mode: vertical-rl; font-size: 10px; letter-spacing: .18em; color: var(--olive-500); }
+
+    section { padding: 120px 0; }
+    .section-label { color: var(--olive-700); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    .section-title { margin: 14px 0 24px; color: var(--olive-900); font: 400 clamp(38px, 5vw, 62px)/1.14 var(--serif); letter-spacing: -.045em; }
+    .section-title em { color: var(--olive-500); font-weight: 400; }
+
+    .about { background: rgba(255, 253, 247, .72); border-block: 1px solid rgba(52,69,46,.08); }
+    .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 11vw; align-items: center; }
+    .about-mark { position: relative; min-height: 400px; display: grid; place-items: center; }
+    .about-mark::before { content: ""; position: absolute; width: 320px; height: 320px; border-radius: 46% 54% 43% 57%; background: rgba(202,212,189,.45); transform: rotate(13deg); }
+    .bowl { position: relative; z-index: 1; width: 250px; height: 125px; border-radius: 15px 15px 120px 120px; background: var(--paper); border: 2px solid var(--olive-700); box-shadow: 0 16px 30px rgba(52,69,46,.1); display: grid; place-items: center; color: var(--olive-700); font: 700 20px var(--serif); }
+    .bowl::before { content: ""; position: absolute; width: 236px; height: 54px; top: -26px; border-radius: 50%; background: #806344; border: 10px solid var(--paper); box-shadow: 0 0 0 2px var(--olive-700); }
+    .bowl span { position: relative; z-index: 2; margin-top: 24px; }
+    .sprig { position: absolute; z-index: 3; top: 34px; right: 15%; width: 3px; height: 120px; background: var(--olive-700); transform: rotate(23deg); }
+    .sprig i { position: absolute; width: 50px; height: 23px; border-radius: 100% 0; background: var(--olive-500); }
+    .sprig i:nth-child(1) { top: 12px; right: 0; transform: rotate(25deg); }
+    .sprig i:nth-child(2) { top: 50px; left: 0; transform: rotate(160deg); }
+    .sprig i:nth-child(3) { top: 84px; right: 0; transform: rotate(18deg) scale(.8); }
+    .about-copy > p { color: var(--muted); max-width: 600px; }
+    .about-notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 42px; }
+    .note { padding-top: 18px; border-top: 1px solid var(--line); }
+    .note strong { display: block; color: var(--olive-900); font: 400 20px var(--serif); }
+    .note span { color: var(--muted); font-size: 12px; }
+
+    .products-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; }
+    .filters { display: flex; gap: 8px; margin-bottom: 30px; }
+    .filter { border: 1px solid var(--line); border-radius: 100px; background: transparent; color: var(--muted); padding: 9px 16px; cursor: pointer; transition: .2s; font-size: 13px; }
+    .filter.active, .filter:hover { color: white; background: var(--olive-700); border-color: var(--olive-700); }
+    .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .product-card { background: var(--paper); border: 1px solid rgba(52,69,46,.08); border-radius: 160px 160px 24px 24px; padding: 14px 14px 28px; transition: .35s ease; box-shadow: 0 8px 30px rgba(52,69,46,.04); }
+    .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow); }
+    .product-card.hidden { display: none; }
+    .product-visual { position: relative; height: 280px; overflow: hidden; border-radius: 150px 150px 20px 20px; display: grid; place-items: center; }
+    .v1 { background: #e7e4cf; } .v2 { background: #e9dcc1; } .v3 { background: #dbe3d0; } .v4 { background: #e6d8c9; }
+    .package { position: relative; z-index: 2; width: 128px; height: 180px; background: #f8f3e6; border: 1px solid rgba(74,78,60,.16); border-radius: 10px 10px 18px 18px; box-shadow: 0 16px 25px rgba(77,67,48,.14); text-align: center; padding-top: 54px; transform: rotate(-2deg); }
+    .package.jar { height: 150px; border-radius: 22px; padding-top: 48px; background: rgba(255,250,238,.88); }
+    .package.jar::before { content: ""; position: absolute; left: 7px; right: 7px; top: -13px; height: 28px; background: var(--olive-700); border-radius: 7px; }
+    .package.long { width: 105px; height: 190px; transform: rotate(3deg); }
+    .package::after { content: "♧"; display: block; color: var(--olive-500); font-size: 30px; line-height: 1; }
+    .package b { color: var(--olive-900); font: 700 15px/1 var(--serif); }
+    .package small { display: block; margin: 7px 0; font-size: 8px; letter-spacing: .12em; color: var(--muted); }
+    .product-visual .leaf { opacity: .55; }
+    .product-info { padding: 20px 8px 0; }
+    .product-type { color: var(--olive-500); font-size: 10px; letter-spacing: .15em; font-weight: 700; }
+    .product-info h3 { margin: 5px 0 4px; color: var(--olive-900); font: 400 21px var(--serif); }
+    .product-info p { margin: 0; color: var(--muted); font-size: 12px; }
+
+    .promise { position: relative; background: var(--olive-900); color: #f6f1e5; overflow: hidden; }
+    .promise::before, .promise::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(255,255,255,.08); }
+    .promise::before { width: 600px; height: 600px; left: -270px; top: -300px; }
+    .promise::after { width: 420px; height: 420px; right: -170px; bottom: -250px; }
+    .promise .section-label, .promise .section-title { color: #f6f1e5; }
+    .promise-head { display: grid; grid-template-columns: 1fr 1fr; gap: 10vw; align-items: end; margin-bottom: 65px; }
+    .promise-head p { color: rgba(246,241,229,.65); margin-bottom: 8px; }
+    .promise-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255,255,255,.16); }
+    .promise-item { position: relative; padding: 34px 25px 10px; border-right: 1px solid rgba(255,255,255,.16); }
+    .promise-item:last-child { border-right: 0; }
+    .promise-num { display: block; color: #b9c8a7; font: italic 22px var(--serif); margin-bottom: 52px; }
+    .promise-item h3 { font: 400 23px var(--serif); margin: 0 0 12px; }
+    .promise-item p { margin: 0; color: rgba(246,241,229,.62); font-size: 13px; }
+
+    footer { padding: 62px 0 32px; background: #263322; color: rgba(255,255,255,.7); }
+    .footer-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .footer-logo { color: white; font: 400 clamp(34px, 5vw, 60px) var(--serif); letter-spacing: -.05em; }
+    .footer-tagline { max-width: 360px; text-align: right; font-size: 13px; }
+    .footer-bottom { display: flex; justify-content: space-between; padding-top: 24px; font-size: 11px; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .hero { height: auto; min-height: 900px; }
+      .hero-grid { grid-template-columns: 1fr; padding-top: 140px; text-align: center; }
+      .hero-copy { margin-inline: auto; }
+      .hero-actions, .eyebrow { justify-content: center; }
+      .hero-art { height: 450px; min-height: 0; }
+      .about-grid { grid-template-columns: 1fr; gap: 50px; }
+      .about-mark { min-height: 330px; }
+      .products-head { display: block; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .promise-head { grid-template-columns: 1fr; gap: 10px; }
+      .promise-grid { grid-template-columns: repeat(2, 1fr); }
+      .promise-item:nth-child(2) { border-right: 0; }
+      .promise-item { border-bottom: 1px solid rgba(255,255,255,.16); padding-bottom: 30px; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 28px, 1160px); }
+      .nav { height: 72px; }
+      .menu-btn { display: block; }
+      .nav-links { position: fixed; inset: 72px 14px auto; display: grid; gap: 0; background: var(--paper); border-radius: 18px; padding: 12px; box-shadow: var(--shadow); opacity: 0; transform: translateY(-12px); pointer-events: none; transition: .2s; }
+      .nav-links.open { opacity: 1; transform: none; pointer-events: auto; }
+      .nav-links a { padding: 12px; }
+      .nav-cta { border: 0; }
+      h1 { font-size: clamp(52px, 17vw, 76px); }
+      h1 span { font-size: 24px; }
+      .hero { min-height: 860px; }
+      .hero-grid { padding-top: 115px; }
+      .hero-art { height: 380px; }
+      .dog { transform: translateX(-50%) scale(.78); transform-origin: center bottom; }
+      .scroll-note { display: none; }
+      section { padding: 88px 0; }
+      .about-notes { grid-template-columns: 1fr; }
+      .about-mark { min-height: 280px; transform: scale(.82); }
+      .filters { overflow-x: auto; padding-bottom: 5px; }
+      .filter { white-space: nowrap; }
+      .product-grid { grid-template-columns: 1fr; }
+      .product-visual { height: 330px; }
+      .promise-grid { grid-template-columns: 1fr; }
+      .promise-item { border-right: 0; }
+      .promise-num { margin-bottom: 24px; }
+      .footer-top { display: block; }
+      .footer-tagline { text-align: left; margin-top: 16px; }
+      .footer-bottom { display: block; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="header">
+    <nav class="nav container" aria-label="주요 메뉴">
+      <a class="logo" href="#home" aria-label="petinclover 홈">
+        <span class="clover" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        petinclover
+      </a>
+      <button class="menu-btn" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
+      <div class="nav-links">
+        <a href="#about">브랜드 이야기</a>
+        <a href="#products">베스트 상품</a>
+        <a href="#promise">건강 약속</a>
+        <a class="nav-cta" href="#products">상품 둘러보기</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <span class="eyebrow">Natural meal for happy dogs</span>
+          <h1>petinclover<span>건강을 담은, 행복한 한 끼</span></h1>
+          <p class="hero-copy">소중한 반려견의 매일이 더 건강하고 즐거울 수 있도록. 자연을 닮은 재료와 다정한 마음으로 한 끼와 간식을 만듭니다.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#products">베스트 상품 보기 <span class="arrow">→</span></a>
+            <a class="btn btn-text" href="#about">우리 이야기</a>
+          </div>
+        </div>
+        <div class="hero-art reveal" aria-label="행복한 반려견 손그림 일러스트">
+          <div class="wash wash-a"></div><div class="wash wash-b"></div><div class="sun"></div>
+          <i class="leaf l1"></i><i class="leaf l2"></i><i class="leaf l3"></i><i class="leaf l4"></i>
+          <div class="dog">
+            <div class="ear left"></div><div class="ear right"></div>
+            <div class="dog-body"></div>
+            <div class="collar"></div><div class="tag">♧</div>
+            <div class="dog-head">
+              <i class="eye left"></i><i class="eye right"></i>
+              <div class="muzzle"><i class="nose"></i><i class="smile left"></i><i class="smile right"></i></div>
+            </div>
+          </div>
+          <div class="scribble"></div>
+        </div>
+      </div>
+      <span class="scroll-note">SCROLL TO DISCOVER</span>
+    </section>
+
+    <section class="about" id="about">
+      <div class="container about-grid">
+        <div class="about-mark reveal" aria-hidden="true">
+          <div class="bowl"><span>petinclover</span></div>
+          <span class="sprig"><i></i><i></i><i></i></span>
+        </div>
+        <div class="about-copy reveal">
+          <span class="section-label">Our story</span>
+          <h2 class="section-title">좋은 하루는<br><em>좋은 한 끼</em>에서 시작되니까</h2>
+          <p>펫인클로버는 반려견의 건강과 행복을 가장 먼저 생각합니다. 프리미엄 수제 사료부터 영양 간식까지, 매일 안심하고 건넬 수 있는 먹거리를 정성스럽게 고민합니다.</p>
+          <div class="about-notes">
+            <div class="note"><strong>Made with care</strong><span>다정한 마음을 담아</span></div>
+            <div class="note"><strong>For every day</strong><span>건강한 일상을 위해</span></div>
+            <div class="note"><strong>Happy together</strong><span>함께하는 행복까지</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="products">
+      <div class="container">
+        <div class="products-head reveal">
+          <div>
+            <span class="section-label">Best collection</span>
+            <h2 class="section-title">매일 기다려지는<br><em>맛있는 건강 습관</em></h2>
+          </div>
+          <div class="filters" role="group" aria-label="상품 종류 필터">
+            <button class="filter active" type="button" data-filter="all">전체</button>
+            <button class="filter" type="button" data-filter="meal">사료</button>
+            <button class="filter" type="button" data-filter="snack">간식</button>
+            <button class="filter" type="button" data-filter="care">건강 케어</button>
+          </div>
+        </div>
+        <div class="product-grid reveal">
+          <article class="product-card" data-category="meal">
+            <div class="product-visual v1"><i class="leaf l1"></i><div class="package"><b>Premium Meal</b><small>HANDMADE FOOD</small></div></div>
+            <div class="product-info"><span class="product-type">PREMIUM MEAL</span><h3>프리미엄 수제 사료</h3><p>건강한 매일을 채우는 든든한 한 끼</p></div>
+          </article>
+          <article class="product-card" data-category="snack">
+            <div class="product-visual v2"><i class="leaf l3"></i><div class="package jar"><b>Daily Treat</b><small>NUTRITION SNACK</small></div></div>
+            <div class="product-info"><span class="product-type">NUTRITION SNACK</span><h3>영양 수제 간식</h3><p>맛있게 즐기는 기분 좋은 영양 간식</p></div>
+          </article>
+          <article class="product-card" data-category="care">
+            <div class="product-visual v3"><i class="leaf l2"></i><div class="package long"><b>Dental Stick</b><small>DAILY CLEAN</small></div></div>
+            <div class="product-info"><span class="product-type">DENTAL CARE</span><h3>덴탈 스틱</h3><p>씹는 즐거움으로 시작하는 데일리 케어</p></div>
+          </article>
+          <article class="product-card" data-category="care">
+            <div class="product-visual v4"><i class="leaf l4"></i><div class="package"><b>Care Jerky</b><small>HEALTHY BITE</small></div></div>
+            <div class="product-info"><span class="product-type">HEALTHY CARE</span><h3>건강 케어 져키</h3><p>간편하고 맛있게 챙기는 건강 루틴</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="promise" id="promise">
+      <div class="container">
+        <div class="promise-head reveal">
+          <div><span class="section-label">Our promise</span><h2 class="section-title">작은 한 입에도<br>건강한 약속을</h2></div>
+          <p>매일 주고 싶은 마음을 기준으로, 반려견의 즐거운 식사 시간과 건강한 일상을 함께 생각합니다.</p>
+        </div>
+        <div class="promise-grid reveal">
+          <article class="promise-item"><span class="promise-num">01</span><h3>엄선한 원료</h3><p>한 끼의 기본이 되는 원료부터 세심하게 살핍니다.</p></article>
+          <article class="promise-item"><span class="promise-num">02</span><h3>정성스러운 제조</h3><p>수제 먹거리의 다정한 마음과 정성을 담습니다.</p></article>
+          <article class="promise-item"><span class="promise-num">03</span><h3>균형 잡힌 영양</h3><p>맛있는 즐거움과 건강한 균형을 함께 고민합니다.</p></article>
+          <article class="promise-item"><span class="promise-num">04</span><h3>행복한 일상</h3><p>반려견과 보호자가 오래 행복할 수 있기를 바랍니다.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-logo">petinclover</div>
+        <p class="footer-tagline">반려견의 건강한 오늘과<br>행복한 내일을 함께 그립니다.</p>
+      </div>
+      <div class="footer-bottom"><span>© petinclover</span><span>Healthy meal, happy life.</span></div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.querySelector('#header');
+    const menuButton = document.querySelector('.menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 24);
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader();
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+    }));
+
+    document.querySelectorAll('.filter').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelector('.filter.active')?.classList.remove('active');
+        button.classList.add('active');
+        const target = button.dataset.filter;
+        document.querySelectorAll('.product-card').forEach(card => {
+          card.classList.toggle('hidden', target !== 'all' && card.dataset.category !== target);
+        });
+      });
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
