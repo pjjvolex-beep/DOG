@@ -1,0 +1,7 @@
+{
+  "name": "pet-in-clover",
+  "private": true,
+  "scripts": {
+    "build": "node -e \"console.log('static site ready')\""
+  }
+}
