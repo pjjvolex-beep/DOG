@@ -1,0 +1,28 @@
+# pet in clover 프로젝트용 에이전트 팀 설정
+# 실제 작업에서는 루트 AGENTS.md의 위임 규칙이 최우선으로 적용됩니다.
+
+[team]
+name = "pet-in-clover-ai-dev-team"
+lead = "main"
+delegation_mode = "role_first"
+qa_before_publish = true
+
+[agents.html]
+name = "짱구"
+role = "HTML 담당"
+prompt_file = ".codex/agents/jjanggu.md"
+
+[agents.css]
+name = "철수"
+role = "CSS 담당"
+prompt_file = ".codex/agents/chulsu.md"
+
+[agents.js]
+name = "훈이"
+role = "JS 담당"
+prompt_file = ".codex/agents/hunyi.md"
+
+[agents.qa]
+name = "맹구"
+role = "QA 엔지니어"
+prompt_file = ".codex/agents/maenggu.md"
